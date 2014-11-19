@@ -1,0 +1,19 @@
+{
+  "manifest_version": 2,
+
+  "name": "Gmail syntax highlighting",
+  "description": "This extension demonstrates a browser action with kittens.",
+  "version": "1.0",
+
+  "permissions": [
+    "https://mail.google.com/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": ["https://mail.google.com/*"],
+      "js": ["jquery.min.js", "highlight.min.js", "main.js"],
+      "run_at": "document_end"
+    }
+  ],
+  "manifest_version": 2
+}

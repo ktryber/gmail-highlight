@@ -1,30 +1,4 @@
-<html>
-<head>
-
-<script src="highlight.min.js"></script>
-<script src="jquery.min.js"></script>
-</head>
-<body>
-
-<div id="test_code">
-
-<div>@requires_authorization</div>
-<div>def somefunc(param1='', param2=0):</div>
-<div>&nbsp; &nbsp; r'''A docstring'''</div>
-<div>&nbsp; &nbsp; if param1 &gt; param2: # interesting</div>
-<div>&nbsp; &nbsp; &nbsp; &nbsp; print 'Gre\'ater'</div>
-<div>&nbsp; &nbsp; return (param2 - param1 + 1 + 0b10l) or None</div>
-<div><br></div>
-<div>class SomeClass:</div>
-<div>&nbsp; &nbsp; pass</div>
-<div><br></div>
-<div>&gt;&gt;&gt; message = '''interpreter</div>
-<div>... prompt'''</div>
-
-</div>
-<script>
 function convert() {
-
  	var selObj = window.getSelection();
     if (selObj.rangeCount == 0) {
       alert('Please select the code first');
@@ -111,7 +85,12 @@ elem.find('.hljs-chunk')
 	
 }
 
-</script>
-<button onclick="convert()">Test</button>
-</body>
-</html>
+
+function addButton() {
+	if (!$('codebtn').length > 0) {
+		$( "div[command='+removeFormat']" ).replaceWith('<div id="codebtn" onclick="convert()" class="J-Z-I J-J5-Ji">{...}</div>');
+	//$( "div[command='+removeFormat']" ).remove();
+	}
+}
+
+setInterval(addButton, 1000);
