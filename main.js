@@ -1,7 +1,7 @@
 function convert() {
  	var selObj = window.getSelection();
     if (selObj.rangeCount == 0) {
-      alert('Please select the code first');
+      alert('Please select the text to highlight first');
       return;
     }
     var selRange = selObj.getRangeAt(0);
@@ -88,9 +88,19 @@ elem.find('.hljs-chunk')
 
 function addButton() {
 	if (!$('codebtn').length > 0) {
-		$( "div[command='+removeFormat']" ).replaceWith('<div id="codebtn" onclick="convert()" class="J-Z-I J-J5-Ji">{...}</div>');
-	//$( "div[command='+removeFormat']" ).remove();
+		var onclick = 'window.postMessage({ type: \'CONVERT\'}, \'*\')';
+		$( "div[command='+removeFormat']" ).replaceWith('<div id="codebtn" onclick="' + onclick + '" class="J-Z-I J-J5-Ji">{...}</div>');
 	}
 }
 
 setInterval(addButton, 1000);
+
+window.addEventListener("message", function(event) {
+  // We only accept messages from ourselves
+  if (event.source != window)
+    return;
+
+  if (event.data.type && (event.data.type == "CONVERT")) {
+  	convert();
+  }
+}, false);
