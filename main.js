@@ -5,7 +5,6 @@ function convert() {
       return;
     }
     var selRange = selObj.getRangeAt(0);
-
     var newElement = document.createElement("div");
     var documentFragment = selRange.extractContents();
     var block = $('<div></div>').append(documentFragment);

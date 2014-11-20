@@ -2,7 +2,7 @@
   "manifest_version": 2,
 
   "name": "Gmail syntax highlighting",
-  "description": "This extension demonstrates a browser action with kittens.",
+  "description": "Adds a formatting button to syntax highlight code on Gmail messages.",
   "version": "1.0",
 
   "permissions": [
