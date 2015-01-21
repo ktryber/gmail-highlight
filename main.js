@@ -84,15 +84,17 @@ elem.find('.hljs-chunk')
 	
 }
 
-
+var addButtonInterval;
 function addButton() {
-	if (!$('codebtn').length > 0) {
+	if (!$('#codebtn').length > 0) {
 		var onclick = 'window.postMessage({ type: \'CONVERT\'}, \'*\')';
-		$( "div[command='+removeFormat']" ).replaceWith('<div id="codebtn" onclick="' + onclick + '" class="J-Z-I J-J5-Ji">{...}</div>');
-	}
+		$( "div[command='+removeFormat']" ).after('<div id="codebtn" onclick="' + onclick + '" class="J-Z-I J-J5-Ji">{...}</div>');
+	} else {
+    clearInterval(addButtonInterval);
+  }
 }
 
-setInterval(addButton, 1000);
+addButtonInterval = setInterval(addButton, 1000);
 
 window.addEventListener("message", function(event) {
   // We only accept messages from ourselves
