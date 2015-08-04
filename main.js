@@ -1,10 +1,14 @@
 function convert() {
  	var selObj = window.getSelection();
+  var selRange = selObj.getRangeAt(0);
+
+  // only manipulate the dom if we are on the message contents
+  if (hasSomeParentTheClass(selRange.startContainer, 'editable')) {
     if (selObj.rangeCount == 0) {
-      alert('Please select the text to highlight first');
+      alert('Please select the text to syntax highlight first');
       return;
     }
-    var selRange = selObj.getRangeAt(0);
+
     var newElement = document.createElement("div");
     var documentFragment = selRange.extractContents();
     var block = $('<div></div>').append(documentFragment);
@@ -13,6 +17,7 @@ function convert() {
     newElement.appendChild(block[0]);
     selRange.insertNode(newElement);
     selObj.removeAllRanges();
+  }
 }
 function applyStylesheet(elem) {
 	elem
@@ -85,16 +90,20 @@ elem.find('.hljs-chunk')
 }
 
 var addButtonInterval;
+
+function hasSomeParentTheClass(element, classname) {
+    if (element.className && element.className.split(' ').indexOf(classname)>=0) return true;
+    return element.parentNode && hasSomeParentTheClass(element.parentNode, classname);
+}
+
 function addButton() {
 	if (!$('#codebtn').length > 0) {
 		var onclick = 'window.postMessage({ type: \'CONVERT\'}, \'*\')';
 		$( "div[command='+removeFormat']" ).after('<div id="codebtn" onclick="' + onclick + '" class="J-Z-I J-J5-Ji">{...}</div>');
-	} else {
-    clearInterval(addButtonInterval);
-  }
+	}
 }
 
-addButtonInterval = setInterval(addButton, 1000);
+addButtonInterval = setInterval(addButton, 3000);
 
 window.addEventListener("message", function(event) {
   // We only accept messages from ourselves
