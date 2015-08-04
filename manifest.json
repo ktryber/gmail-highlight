@@ -1,5 +1,5 @@
 {
-  "manifest_version": 3,
+  "manifest_version": 2,
 
   "name": "Gmail syntax highlighting",
   "description": "Adds a formatting button to syntax highlight code on Gmail messages.",
@@ -15,5 +15,5 @@
       "run_at": "document_end"
     }
   ],
-  "manifest_version": 3
+  "manifest_version": 2
 }
