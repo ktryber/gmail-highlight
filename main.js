@@ -71,16 +71,26 @@ function hasSomeParentTheClass(element, classname) {
 function addButton() {
   $( "div[role='toolbar'].J-Z" ).each(function() {
     if ($(this).find('.codebtn').length == 0) {
-      var onclick = 'window.postMessage({ type: \'CONVERT\'}, \'*\')';
-      var btn = $('<div onclick="' + onclick + '" class="codebtn J-Z-I J-J5-Ji" data-tooltip="Syntax Highlight" role="button">{...}</div>');
+// MT: Comment out below line to avoid Chrome Content Security Policy directive error
+// MT: var onclick = 'window.postMessage({ type: \'CONVERT\'}, \'*\')';
+
+// MT: Remove onclick= and give button an id=syntaxButton
+      var btn = $('<div id="syntaxButton" class="codebtn J-Z-I J-J5-Ji" data-tooltip="Syntax Highlight" role="button">{...}</div>');
       $(this).append(btn);
 
       $(this).find('.codebtn').hover(function() { $(this).toggleClass('J-Z-I-JW')});
+// MT: Add Event Listener      
+      document.getElementById("syntaxButton").addEventListener("click", highlightSyntax);
     }
 	});
 }
 // Check every 3 seconds if there's a new toolbar without our button
 var addButtonInterval = setInterval(addButton, 3000);
+
+// MT: Add onlick script into function
+function highlightSyntax(){
+    window.postMessage({ type: 'CONVERT'}, '*');
+}
 
 window.addEventListener("message", function(event) {
   // We only accept messages from ourselves
