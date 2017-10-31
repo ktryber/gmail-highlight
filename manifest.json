@@ -3,7 +3,7 @@
 
   "name": "Gmail syntax highlighting",
   "description": "Adds a formatting button to syntax highlight code on Gmail messages.",
-  "version": "1.2",
+  "version": "1.4",
 
   "permissions": [
     "https://mail.google.com/*"
