@@ -71,15 +71,12 @@ function hasSomeParentTheClass(element, classname) {
 function addButton() {
   $( "div[role='toolbar'].J-Z" ).each(function() {
     if ($(this).find('.codebtn').length == 0) {
-// MT: Comment out below line to avoid Chrome Content Security Policy directive error
-// MT: var onclick = 'window.postMessage({ type: \'CONVERT\'}, \'*\')';
 
-// MT: Remove onclick= and give button an id=syntaxButton
       var btn = $('<div id="syntaxButton" class="codebtn J-Z-I J-J5-Ji" data-tooltip="Syntax Highlight" role="button">{...}</div>');
       $(this).append(btn);
 
       $(this).find('.codebtn').hover(function() { $(this).toggleClass('J-Z-I-JW')});
-// MT: Add Event Listener      
+      // MT: Add Event Listener programmatically instead of using HTML onclick to avoid Chrome Content Security Policy directive error
       document.getElementById("syntaxButton").addEventListener("click", highlightSyntax);
     }
 	});
