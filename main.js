@@ -11,7 +11,16 @@ function convert() {
 
     var newElement = document.createElement("div");
     var documentFragment = selRange.extractContents();
-    var block = $('<div></div>').append(documentFragment);
+    lang = '';
+    node = documentFragment.firstChild;
+    while (node.hasChildNodes()) {
+      node = node.firstChild;
+    }
+    if (node.nodeType == 3) {      
+      lang = node.textContent;
+      if (hljs.listLanguages().indexOf(lang) != -1) node.remove();
+    }
+    var block = $('<div class="' + lang + '"></div>').append(documentFragment);
     hljs.highlightBlock(block[0]);
     applyStylesheet(block);
     newElement.appendChild(block[0]);
