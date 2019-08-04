@@ -1,0 +1,26 @@
+{
+  "name": "syntax-highlight",
+  "description": "A Vue.js web extension",
+  "version": null,
+  "manifest_version": 2,
+  "permissions": ["storage", "file://*/*"],
+  "icons": {
+    "48": "icons/icon_48.png",
+    "128": "icons/icon_128.png"
+  },
+  "browser_action": {
+    "default_title": "syntax-highlight",
+    "default_popup": "popup/popup.html"
+  },
+  "background": {
+    "scripts": ["background.js"]
+  },
+  "options_ui": {
+    "page": "options/options.html",
+    "chrome_style": true
+  },
+  "chrome_url_overrides": {
+    "newtab": "tab/tab.html"
+  },
+  "content_security_policy": "script-src 'self' 'unsafe-eval'  https://fonts.googleapis.com; object-src 'self'"
+}
